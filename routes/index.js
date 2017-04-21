@@ -5,8 +5,11 @@ var User = require('../models/User')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  // mongodb://heroku_kxrbmjj6:atbn8epinkrs7ckqfm8afvic0r@ds133450.mlab.com:33450/heroku_kxrbmjj6
 
-  mongoose.connect('mongodb://admin:admin@ds161018.mlab.com:61018/conf', function(err, res) {
+  // var dbUrl = 'mongodb://admin:admin@ds161018.mlab.com:61018/conf';
+  var dbUrl = 'mongodb://heroku_kxrbmjj6:atbn8epinkrs7ckqfm8afvic0r@ds133450.mlab.com:33450/heroku_kxrbmjj6';
+  mongoose.connect(dbUrl, function(err, res) {
     if (err) {
       console.log('DB Connection Failed: ' + err);
     } else {
@@ -14,10 +17,8 @@ router.get('/', function(req, res, next) {
     }
   })  
 
-  
-
   var user = new User({
-    email: 'a@bc.com',
+    email: 'd@bc.com',
     password: 'woot'
   });
 
