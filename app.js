@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config.dev';
 
 import index from './routes/index';
@@ -14,9 +15,14 @@ import users from './routes/users';
 
 var app = express();
 
+const compiler = webpack(webpackConfig);
+
+app.use(webpackMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler));
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(webpackMiddleware(webpack(webpackConfig)));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
