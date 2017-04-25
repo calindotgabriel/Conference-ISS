@@ -2,8 +2,8 @@
   "name": "conference",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "server": "babel-node ./bin/www",
+  "scripts": {  
+    "server": "nodemon --exec babel-node -- ./bin/www",
     "start": "node ./bin/www"
   },
   "dependencies": {
