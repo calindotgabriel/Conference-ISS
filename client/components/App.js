@@ -6,7 +6,9 @@ class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <NavigationBar/>
+                {/*<NavigationBar/> */}
+                Patinat
+                {/*{this.props.children}*/}
             </div>
         );
     }

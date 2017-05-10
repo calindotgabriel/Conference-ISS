@@ -1,8 +1,11 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
+import Greetings from './components/Greetings';
 
 export default (
-    <Route path="/" component={App} />
+    <Route path="/" component={App}>
+        {/*<IndexRoute component={Greetings}  />*/}
+    </Route>
 )
