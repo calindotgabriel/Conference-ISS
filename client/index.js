@@ -14,6 +14,7 @@ render((
     <div> 
         <Route path="/" component={App}/>
         <Route path="/signup" component={SignupPage}/>
+        <Route path="/greetings" component={Greetings}/>
       </div> 
   </Router>
 ), document.getElementById('app'));
