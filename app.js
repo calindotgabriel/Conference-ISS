@@ -11,7 +11,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config.dev';
 
 // import index from './routes/index';
-// import users from './routes/users';
+import users from './routes/api';
 
 let app = express();
 
@@ -36,16 +36,16 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', index);
 // app.use('/users', users);
 
-const router = express.Router();
+app.use('/api', users);
 
+const router = express.Router();
 router.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, './index.html')); 
 });
-
 app.use(router);
+
 
 
 module.exports = app;
