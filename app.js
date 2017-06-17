@@ -10,8 +10,7 @@ import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config.dev';
 
-// import index from './routes/index';
-import users from './routes/api';
+import auth from './api/auth';
 
 const app = express();
 
@@ -28,22 +27,20 @@ app.use(webpackMiddleware(compiler, {
 // app.use(webpackMiddleware(compiler));
 
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // app.use(logger('dev'));
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', users);
-
 const router = express.Router();
+
+app.use('/api/auth', auth);
+
 router.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, './index.html')); 
 });
 app.use(router);
-
 
 
 module.exports = app;

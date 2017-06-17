@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import TextFieldGroup from './common/TextFieldGroup';
+
+import { login } from '../actions/login';
+
 
 class LoginForm extends Component {
     constructor(props) {
@@ -51,7 +55,15 @@ class LoginForm extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        this.setState( { errors: {} })
+        this.props.login(this.state).then(  
+            (res) => this.context.router.push('/'),
+            (err) => this.setState({ errors: err.response.data.errors}));
   }
 }
 
-export default LoginForm;
+LoginForm.contextTypes = {
+    router : React.PropTypes.object.isRequired
+}
+
+export default connect(null, { login })(LoginForm);

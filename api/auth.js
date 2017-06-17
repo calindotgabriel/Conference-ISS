@@ -6,11 +6,8 @@ const user = {
   password: "patinat"
 }
 
-router.get('/', (req, res) => {
+router.get('/login', (req, res) => {
   res.json(user);
-})
-router.get('/users', (req, res) => {
-  res.send('Users API endpoint')
 });
 
 module.exports = router;
