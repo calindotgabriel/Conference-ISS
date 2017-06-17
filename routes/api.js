@@ -1,8 +1,13 @@
 import express from 'express';
 const router = express.Router();
 
+const user = {
+  username: "patina",
+  password: "patinat"
+}
+
 router.get('/', (req, res) => {
-  res.send('Api Index')
+  res.json(user);
 })
 router.get('/users', (req, res) => {
   res.send('Users API endpoint')

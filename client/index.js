@@ -6,10 +6,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 
-
-import App from './components/App';
-import Greetings from './components/Greetings';
-import SignupPage from './components/SignupPage';
+import routes from './routes';
  
 const store = createStore(
   (state = {}) => state,
@@ -19,11 +16,7 @@ const store = createStore(
 render((
   <Provider store={store}>
     <Router>
-      <div> 
-          <Route path="/" component={App}/>
-          <Route path="/signup" component={SignupPage}/>
-          <Route path="/greetings" component={Greetings}/>
-        </div> 
+        {routes}
     </Router>
   </Provider>
 ), document.getElementById('app'));

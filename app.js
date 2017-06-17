@@ -13,7 +13,7 @@ import webpackConfig from './webpack.config.dev';
 // import index from './routes/index';
 import users from './routes/api';
 
-let app = express();
+const app = express();
 
 const compiler = webpack(webpackConfig);
 
@@ -35,8 +35,6 @@ app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// app.use('/users', users);
 
 app.use('/api', users);
 
