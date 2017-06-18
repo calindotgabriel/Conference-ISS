@@ -25,13 +25,12 @@ class LoginForm extends Component {
         <form onSubmit={this.onSubmit}>
             <h1>Login</h1>
 
-            { errors.form && <div className="alert alert-danger">{errors.form}</div> }
+            { errors && <div className="alert alert-danger">{errors}</div> }
 
             <TextFieldGroup
                 field="identifier"
                 label="Username / Email"
                 value={identifier}
-                error={errors.identifier}
                 onChange={this.onChange}
             />
 
@@ -39,7 +38,6 @@ class LoginForm extends Component {
                 field="password"
                 label="Password"
                 value={password}
-                error={errors.password}
                 onChange={this.onChange}
                 type="password"
             />
@@ -59,7 +57,7 @@ class LoginForm extends Component {
         this.props.login(this.state).then(  
             (res) => this.context.router.push('/'),
             (err) => this.setState({ errors: err.response.data.errors}));
-  }
+    }
 }
 
 LoginForm.contextTypes = {

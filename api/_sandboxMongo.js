@@ -8,7 +8,7 @@ var router = express.Router();
 const user = {
   username: "patina",
   password: "patinat"
-}
+};
 
 router.get('/api/login', (req, res) => {
   res.json(user);

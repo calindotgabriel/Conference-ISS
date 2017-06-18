@@ -10,6 +10,10 @@ import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config.dev';
 
+import mongoose from 'mongoose';
+
+import User from './models/User';
+
 import auth from './api/auth';
 
 const app = express();
@@ -26,6 +30,19 @@ app.use(webpackMiddleware(compiler, {
 
 // app.use(webpackMiddleware(compiler));
 
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/conference');
+
+mongoose.connection.once('open', function(){
+    console.log('MongoDB Connected');
+}).on('error', function(error){
+    console.log('MongoDB Connection error:', error);
+});
+
+// const user = new User({username: 'pattine', password: 'puscapatina'});
+// user.save().then(function() {
+//   console.log('Saved a user in db.');
+// })
 
 // app.use(logger('dev'));
 app.use(bodyParser.json());

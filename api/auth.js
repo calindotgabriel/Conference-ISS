@@ -1,13 +1,20 @@
 import express from 'express';
 const router = express.Router();
 
-const user = {
-  username: "patina",
-  password: "patinat"
-}
+import User from '../models/User';
 
-router.get('/login', (req, res) => {
-  res.json(user);
+router.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  User.findOne({username: username, password: password})
+    .exec().then((user) => {
+      if (user) { 
+        res.json(user); 
+      }
+      res.status(401).json({ errors : 'No such user!'})
+    })
+    .catch((err) => {
+      res.status(401).json({ errors : err});
+    })
 });
 
-module.exports = router;
+export default router;
