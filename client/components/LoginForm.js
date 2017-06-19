@@ -9,9 +9,8 @@ class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            identifier: '',
-            password: '',
-            errors: {}
+            username: 'admin',
+            password: 'admin',
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -19,18 +18,18 @@ class LoginForm extends Component {
     }
 
     render() {
-        const { errors, identifier, password } = this.state;
+        const { errors, username, password } = this.state;
 
         return (
         <form onSubmit={this.onSubmit}>
             <h1>Login</h1>
 
-            { errors && <div className="alert alert-danger">{errors}</div> }
+            { errors && <div className="alert alert-danger">{errors.toString()}</div> }
 
             <TextFieldGroup
-                field="identifier"
+                field="username"
                 label="Username / Email"
-                value={identifier}
+                value={username}
                 onChange={this.onChange}
             />
 
@@ -55,7 +54,7 @@ class LoginForm extends Component {
         e.preventDefault();
         this.setState( { errors: {} })
         this.props.login(this.state).then(  
-            (res) => this.context.router.push('/'),
+            (res) => { this.context.router.history.push('/'); },
             (err) => this.setState({ errors: err.response.data.errors}));
     }
 }

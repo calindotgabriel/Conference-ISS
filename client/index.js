@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, browserHistory } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { IndexRoute } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -15,8 +15,8 @@ const store = createStore(
 
 render((
   <Provider store={store}>
-    <Router>
+    <BrowserRouter>
         {routes}
-    </Router>
+    </BrowserRouter>
   </Provider>
 ), document.getElementById('app'));
