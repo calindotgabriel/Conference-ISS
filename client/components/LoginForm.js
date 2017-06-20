@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextFieldGroup from './common/TextFieldGroup';
 
-import { login } from '../actions/login';
+import { login } from '../actions/authActions';
 
 
 class LoginForm extends Component {
@@ -54,7 +54,10 @@ class LoginForm extends Component {
         e.preventDefault();
         this.setState( { errors: {} })
         this.props.login(this.state).then(  
-            (res) => { this.context.router.history.push('/'); },
+            (res) => { 
+                this.context.router.history.push('/');
+                console.log('Logged in as ' + res.data.username) ;
+                },
             (err) => this.setState({ errors: err.response.data.errors}));
     }
 }
