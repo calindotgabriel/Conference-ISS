@@ -53,13 +53,19 @@ class LoginForm extends Component {
     onSubmit(e) {
         e.preventDefault();
         this.setState( { errors: {} })
+        // debugger;  
         this.props.login(this.state).then(  
             (res) => { 
+                debugger;
                 this.context.router.history.push('/');
                 console.log('Logged in as ' + res.data.username) ;
                 },
             (err) => this.setState({ errors: err.response.data.errors}));
     }
+}
+
+LoginForm.propTypes = {
+    login: React.PropTypes.func.isRequired
 }
 
 LoginForm.contextTypes = {

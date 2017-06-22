@@ -17,15 +17,19 @@ router.post('/login', (req, res) => {
         const username = user.get('username');
         console.log(`id: ${id} username: ${username}`);
         const token = jwt.sign({ id: id, username: username }, config.jwtSecret);
-        console.log(`token: ${token}`);
-        res.json({
+        // console.log(`token: ${token}`);
+        const resp = {
           username : username,
           token: token
-        }); 
+        };
+        console.log(`responded with: ${resp.username}, ${resp.token}`);
+        res.json(resp); 
+      } else {
+        res.status(401).json({ errors : 'No such user!'})
       }
-      res.status(401).json({ errors : 'No such user!'})
     })
     .catch((err) => {
+      console.log('err: ' + err.toString())
       res.status(401).json({ errors : err});
     })
 });
