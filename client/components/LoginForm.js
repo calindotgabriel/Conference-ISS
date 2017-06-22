@@ -56,7 +56,7 @@ class LoginForm extends Component {
         // debugger;  
         this.props.login(this.state).then(  
             (res) => { 
-                debugger;
+                // debugger;
                 this.context.router.history.push('/');
                 console.log('Logged in as ' + res.data.username) ;
                 },

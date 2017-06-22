@@ -6,6 +6,7 @@ export function login(data) {
             .then(res => {
                 const token = res.data.token;
                 localStorage.setItem('jwtToken', token);
+                return res;
             });
     }
 }

@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
     })
     .catch((err) => {
       console.log('err: ' + err.toString())
-      res.status(401).json({ errors : err});
+      res.status(401).json({ errors : err.toString()});
     })
 });
 
