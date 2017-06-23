@@ -13,8 +13,10 @@ import webpackConfig from './webpack.config.dev';
 import mongoose from 'mongoose';
 
 import User from './models/User';
+import Paper from './models/Paper';
 
 import auth from './api/auth';
+import papers from './api/papers';
 
 const app = express();
 
@@ -44,6 +46,10 @@ mongoose.connection.once('open', function(){
 //   console.log('Saved a user in db.');
 // })
 
+// const paper = new Paper({firstGrader: 'gigi', secondGrader: 'oroboro', firstGrade: 7, secondGrade: 8})
+// paper.save().then(() => {
+//     console.log("saved paper in db!");
+// })
 // app.use(logger('dev'));
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -53,6 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const router = express.Router();
 
 app.use('/api/auth', auth);
+app.use('/api/papers', papers);
 
 router.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, './index.html')); 

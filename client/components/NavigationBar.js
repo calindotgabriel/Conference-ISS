@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { logout } from '../actions/authActions';
 import { connect } from 'react-redux';
 
+import jwtDecode from 'jwt-decode';
+
 class NavigationBar extends React.Component { 
 
     render() {
@@ -25,7 +27,7 @@ class NavigationBar extends React.Component {
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <Link to="/" className="navbar-brand">Conference</Link> 
+                        <Link to="/" className="navbar-brand">Papers Fever as {jwtDecode(isAuthenticated).username}</Link> 
                     </div>
                 </div>
 
