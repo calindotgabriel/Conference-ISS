@@ -1,8 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../actions/authActions';
+import { connect } from 'react-redux';
 
 class NavigationBar extends React.Component { 
+
     render() {
+        const userLinks = (
+        <ul className="nav navbar-nav navbar-right">
+            <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
+        </ul>
+        );
+
+        const guestLinks = (
+        <ul className="nav navbar-nav navbar-right">
+            <li><Link to="/login">Login</Link></li>
+        </ul>
+        );
+        
+        const isAuthenticated = localStorage.getItem('jwtToken') ;
+
         return (
         <div>
             <nav className="navbar navbar-default">
@@ -12,17 +29,36 @@ class NavigationBar extends React.Component {
                     </div>
                 </div>
 
-                <div className="">
-                    <ul className="nav navbar-nav navbar-right">
-                        <li><Link to="/login">Login</Link></li>
-                    </ul>
-                </div>
+                { isAuthenticated ? userLinks : guestLinks }
+
             </nav>
         </div>
     )
     }
-    
+
+    logout(e) {
+        e.preventDefault();
+        localStorage.removeItem('jwtToken');
+        this.context.router.history.push('/');
+        this.setState({})
+    }
 }
 
-export default NavigationBar;
+NavigationBar.propTypes = {
+//   auth: React.PropTypes.object.isRequired,
+  logout: React.PropTypes.func.isRequired
+}
+
+
+NavigationBar.contextTypes = {
+    router : React.PropTypes.object.isRequired
+}
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(mapStateToProps, { logout })(NavigationBar);
 

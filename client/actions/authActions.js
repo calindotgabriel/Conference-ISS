@@ -11,8 +11,14 @@ export function login(data) {
                 const user = res.data.username;
                 localStorage.setItem('jwtToken', token);
                 setAuthorizationToken(token);
-                dispatch({ type: SET_CURRENT_USER, user : res.data.username });
-                // return res;
+                // dispatch({ type: SET_CURRENT_USER, user : res.data.username });
+                return res;
             });
+    }
+}
+
+export function logout() {
+    return dispatch => {
+        localStorage.removeItem('jwtToken');
     }
 }
