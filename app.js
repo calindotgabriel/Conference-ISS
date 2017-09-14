@@ -11,7 +11,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config.dev';
 
 // import index from './routes/index';
-import users from './routes/api';
+import users from './routes/users';
 
 let app = express();
 
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/users', users);
 
-app.use('/api', users);
+app.use('/api/users', users);
 
 const router = express.Router();
 router.get('/*', (req, res) => {
