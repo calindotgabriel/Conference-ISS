@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 
 export default {
+    devtool: 'inline-source-map',    
     entry: [ 
         'webpack-hot-middleware/client?reload=true',
         path.join(__dirname, '/client/index.js')
@@ -26,5 +27,5 @@ export default {
     },
     resolve: {
         extensions: [' ', '.js']
-    }
+    },
 }

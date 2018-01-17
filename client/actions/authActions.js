@@ -5,3 +5,9 @@ export function userSignupRequest(userData) {
         return axios.post('/api/users', userData);
     }
 }
+// todo differentiate
+export function userLoginRequest(userData) {
+    return dispatch => {
+        return axios.post('/api/users', userData);
+    }
+}

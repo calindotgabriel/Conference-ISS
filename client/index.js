@@ -10,7 +10,12 @@ import { createStore, applyMiddleware } from 'redux';
 import App from './components/App';
 import Greetings from './components/Greetings';
 import SignupPage from './components/SignupPage';
- 
+import LoginPage from './components/LoginPage';
+import NavigationBar from './components/NavigationBar';
+
+import PeopleList from './components/PeopleList';
+
+
 const store = createStore(
   (state = {}) => state,
   applyMiddleware(thunk)
@@ -19,10 +24,12 @@ const store = createStore(
 render((
   <Provider store={store}>
     <Router>
-      <div> 
+      <div>
           <Route path="/" component={App}/>
           <Route path="/signup" component={SignupPage}/>
+          <Route path="/login" component={LoginPage}/>
           <Route path="/greetings" component={Greetings}/>
+          <Route path="/test" component={PeopleList} />
         </div> 
     </Router>
   </Provider>

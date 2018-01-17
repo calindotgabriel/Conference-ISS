@@ -1,33 +1,34 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { userSignupRequest } from '../actions/authActions';
+import { userLoginRequest } from '../actions/authActions';
 
-class SignupForm extends Component {
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: ''
+            username: 'gelu',
+            password: 'atlfel',
+            errors: ''
         }
-
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);        
+        this.onChange = this.onChange.bind(this);        
     }
-
+    onSubmit(e) {
+        e.preventDefault();
+        console.log('onSubmit LoginForm')
+        this.props.userLoginRequest(this.state).then(
+            (res) => { localStorage.setItem('token', res.data.token)},
+            (err) => { this.setState({ errors: err.response.data.error }) }
+        );
+    }
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value});
     }
-
-    onSubmit(e) {
-        e.preventDefault();
-        console.log('onsubmit signupform')
-        this.props.userSignupRequest(this.state);
-    }
-
     render() {
         return (
             <form onSubmit={this.onSubmit}>
+                 { this.state.errors && <div className="alert alert-danger"> {this.state.errors} </div> }
                 <div className="form-group">
                     <label className="control-label">Username</label>
                     <input type="text" name="username" className="form-control"
@@ -36,13 +37,13 @@ class SignupForm extends Component {
 
                 <div className="form-group">
                     <label className="control-label">Password</label>
-                    <input type="text" name="password" className="form-control"
+                    <input type="password" name="password" className="form-control"
                            value={this.state.password} onChange={this.onChange}/>
                 </div>
 
                 <div className="form-group">
                     <button className="btn btn-primary btn-lg">
-                        Sign up
+                        Login
                     </button>
                 </div>
             </form>
@@ -50,5 +51,4 @@ class SignupForm extends Component {
     }
 }
 
-
-export default connect(null, {userSignupRequest})(SignupForm);
+export default connect(null, {userLoginRequest})(LoginForm);
